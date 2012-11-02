@@ -37,10 +37,7 @@ public class ErlangEObjectDocumentationProvider implements IEObjectDocumentation
         result.append(specComment);
       }
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("<pre>");
-      String _sourceText = this.modelExtensions.getSourceText(spec);
-      _builder.append(_sourceText, "");
-      _builder.append("</pre>");
+      _builder.append("<pre>\u00B4spec.sourceText\u00AA</pre>");
       StringBuilder _append = result.append(_builder.toString());
       _append.append("\n");
     }

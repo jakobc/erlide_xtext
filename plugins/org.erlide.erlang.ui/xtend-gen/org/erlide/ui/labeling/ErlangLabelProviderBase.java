@@ -20,6 +20,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.erlide.erlang.Attribute;
 import org.erlide.erlang.CustomAttribute;
 import org.erlide.erlang.DefineAttribute;
+import org.erlide.erlang.ExportAttribute;
 import org.erlide.erlang.Expression;
 import org.erlide.erlang.Expressions;
 import org.erlide.erlang.FunRef;
@@ -27,6 +28,7 @@ import org.erlide.erlang.Function;
 import org.erlide.erlang.FunctionClause;
 import org.erlide.erlang.ModelExtensions;
 import org.erlide.erlang.Module;
+import org.erlide.erlang.ModuleAttribute;
 import org.erlide.erlang.RecordAttribute;
 import org.erlide.ui.labeling.ErlideStyler;
 
@@ -153,20 +155,33 @@ public class ErlangLabelProviderBase extends DefaultEObjectLabelProvider {
   public String text(final Attribute ele) {
     final String tag = ele.getTag();
     String _plus = ("-" + tag);
-    return (_plus + " -- ");
-  }
-  
-  public String text(final FunRef c) {
-    return this._modelExtensions.getSourceText(c);
-  }
-  
-  public String text(final EObject element) {
-    String _sourceText = this._modelExtensions.getSourceText(element);
-    String _plus = ("\u00A7 " + _sourceText);
     String _plus_1 = (_plus + " -- ");
-    Class<? extends Object> _class = element.getClass();
-    String _name = _class.getName();
-    return (_plus_1 + _name);
+    String _sourceText = this._modelExtensions.getSourceText(ele);
+    return (_plus_1 + _sourceText);
+  }
+  
+  public String text(final ModuleAttribute ele) {
+    String _moduleName = ele.getModuleName();
+    return ("module " + _moduleName);
+  }
+  
+  public String text(final ExportAttribute ele) {
+    EList<FunRef> _funs = ele.getFuns();
+    final Function1<FunRef,Function1<FunRef,Object>> _function = new Function1<FunRef,Function1<FunRef,Object>>() {
+        public Function1<FunRef,Object> apply(final FunRef it) {
+          final Function1<FunRef,Object> _function = new Function1<FunRef,Object>() {
+              public Object apply(final FunRef f) {
+                Object _text = ErlangLabelProvider.this.text(f);
+                return _text;
+              }
+            };
+          return _function;
+        }
+      };
+    List<Function1<FunRef,Object>> _map = ListExtensions.<FunRef, Function1<FunRef,Object>>map(_funs, _function);
+    String _join = IterableExtensions.join(_map, ", ");
+    String _plus = ("export: " + _join);
+    return _plus;
   }
   
   public String getListText(final EList<Expression> list) {
@@ -180,27 +195,27 @@ public class ErlangLabelProviderBase extends DefaultEObjectLabelProvider {
     return IterableExtensions.join(_map, ", ");
   }
   
-  public String image(final FunctionClause clause) {
-    return null;
-  }
-  
   public String image(final EObject element) {
     return "full/obj16/skip.gif";
   }
   
-  public String image(final Attribute ele) {
-    return "MyModel.gif";
-  }
-  
-  public String image(final Function function) {
+  public String image(final Function ele) {
     String _xifexpression = null;
-    boolean _isExported = this._modelExtensions.isExported(function);
+    boolean _isExported = this._modelExtensions.isExported(ele);
     if (_isExported) {
-      _xifexpression = "full/obj16/methpub_obj.gif";
+      _xifexpression = "public_function.gif";
     } else {
-      _xifexpression = "full/obj16/methpri_obj.gif";
+      _xifexpression = "private_function.gif";
     }
     return _xifexpression;
+  }
+  
+  public String image(final FunctionClause element) {
+    return "function_clause.gif";
+  }
+  
+  public String image(final Attribute ele) {
+    return "attribute.gif";
   }
   
   private static Styler createStyler(final Font font, final Color color) {

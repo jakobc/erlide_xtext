@@ -36,7 +36,7 @@ public class ErlangTestingHelperTest {
   
   @Test
   public void oneMarker() {
-    final Pair<String,List<Integer>> module = this.parser.extractMarkers("12345\u00A767890");
+    final Pair<String,List<Integer>> module = this.parser.extractMarkers("12345\u00DF67890");
     String _key = module.getKey();
     Matcher<? super String> _is = Matchers.<String>is("1234567890");
     MatcherAssert.<String>assertThat(_key, _is);
@@ -52,7 +52,7 @@ public class ErlangTestingHelperTest {
   
   @Test
   public void severalMarkers() {
-    final Pair<String,List<Integer>> module = this.parser.extractMarkers("12345\u00A7678\u00A790");
+    final Pair<String,List<Integer>> module = this.parser.extractMarkers("12345\u00DF678\u00DF90");
     String _key = module.getKey();
     Matcher<? super String> _is = Matchers.<String>is("1234567890");
     MatcherAssert.<String>assertThat(_key, _is);
@@ -73,7 +73,7 @@ public class ErlangTestingHelperTest {
   
   @Test
   public void firstMarker() {
-    final Pair<String,List<Integer>> module = this.parser.extractMarkers("\u00A71234567890");
+    final Pair<String,List<Integer>> module = this.parser.extractMarkers("\u00DF1234567890");
     String _key = module.getKey();
     Matcher<? super String> _is = Matchers.<String>is("1234567890");
     MatcherAssert.<String>assertThat(_key, _is);
@@ -89,7 +89,7 @@ public class ErlangTestingHelperTest {
   
   @Test
   public void lastMarker() {
-    final Pair<String,List<Integer>> module = this.parser.extractMarkers("1234567890\u00A7");
+    final Pair<String,List<Integer>> module = this.parser.extractMarkers("1234567890\u00DF");
     String _key = module.getKey();
     Matcher<? super String> _is = Matchers.<String>is("1234567890");
     MatcherAssert.<String>assertThat(_key, _is);
@@ -105,7 +105,7 @@ public class ErlangTestingHelperTest {
   
   @Test
   public void succesiveMarkers() {
-    final Pair<String,List<Integer>> module = this.parser.extractMarkers("123456\u00A7\u00A77890");
+    final Pair<String,List<Integer>> module = this.parser.extractMarkers("123456\u00DF\u00DF7890");
     String _key = module.getKey();
     Matcher<? super String> _is = Matchers.<String>is("1234567890");
     MatcherAssert.<String>assertThat(_key, _is);

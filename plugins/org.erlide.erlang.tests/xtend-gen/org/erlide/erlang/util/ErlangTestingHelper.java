@@ -22,7 +22,7 @@ public class ErlangTestingHelper {
   @Inject
   private ParseHelper<Module> parser;
   
-  public final String MARKER = "\u00A7";
+  public final String MARKER = "\u00DF";
   
   public Pair<Module,List<Integer>> parse(final String string) {
     final Pair<String,List<Integer>> res = this.extractMarkers(string);

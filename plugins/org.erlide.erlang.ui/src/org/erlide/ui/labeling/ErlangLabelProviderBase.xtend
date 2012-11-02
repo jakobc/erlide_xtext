@@ -21,6 +21,10 @@ import org.erlide.erlang.FunctionClause
 import org.erlide.erlang.ModelExtensions
 import org.erlide.erlang.Module
 import org.erlide.erlang.RecordAttribute
+import org.erlide.erlang.ModuleAttribute
+import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider
+import org.erlide.erlang.FunRef
+import org.erlide.erlang.ExportAttribute
 
 /**
  * Provides labels for a EObjects.
@@ -94,43 +98,43 @@ public class ErlangLabelProviderBase extends DefaultEObjectLabelProvider {
         return s
     }
     
-	 def String text(Attribute ele) {
-	 	val tag = ele.tag
-	 	return "-" + tag + " -- "
-	 }
-
-	def String text(FunRef c) {
-        return c.sourceText
-    }
-
-	def String text(EObject element) {
-		// just a way to see unwanted elements
-		return "§ " + element.sourceText + " -- "+element.^class.name
+	def String text(Attribute ele) {
+		val tag = ele.tag
+		return "-" + tag + " -- " + ele.sourceText
 	}
+	
+	def String text(ModuleAttribute ele) {
+		return "module " + ele.moduleName
+	}
+
+	def String text(ExportAttribute ele) {
+		"export: " + ele.funs.map[[FunRef f | text(f)]].join(", ")
+	}
+
 
 	def String getListText(EList<Expression> list) {
 		return list.map[sourceText].join(", ")
 	}
 
-    def String image(FunctionClause clause) {
-        null
-    }
-    
     def String image(EObject element) {
         "full/obj16/skip.gif"
     }
-    
-	def String image(Attribute ele) {
-		return "MyModel.gif"
-	}
-
-    def String image(Function function) {
-    	if(function.isExported)
-        	"full/obj16/methpub_obj.gif"
-        else
-        	"full/obj16/methpri_obj.gif"
-    }
-    
+    	
+	def String image(Function ele) {
+		if (ele.exported)
+			"public_function.gif"
+		else
+			"private_function.gif" 
+  	}
+  
+	def String image(FunctionClause element) {
+		"function_clause.gif"
+  	}
+  	
+  	def String image(Attribute ele) {
+  		"attribute.gif"
+  	}
+	    
     def private static Styler createStyler(Font font, Color color) {
         new ErlideStyler(font, color)
     }

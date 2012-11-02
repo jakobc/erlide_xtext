@@ -14,7 +14,6 @@ import org.erlide.project.buildpath.BuildpathApp;
 import org.erlide.project.buildpath.BuildpathEntry;
 import org.erlide.project.buildpath.BuildpathFolder;
 import org.erlide.project.buildpath.BuildpathLibrary;
-import org.erlide.project.buildpath.FolderKind;
 import org.erlide.project.buildpath.convert.OldErlangProjectProperties;
 import org.erlide.project.buildpath.convert.OldProjectBuildpathConverter;
 import org.erlide.project.buildpath.convert.OpbTestContentProvider;
@@ -76,29 +75,26 @@ public class OldProjectBuildpathConverterTest {
   
   private String _debugPrint(final BuildpathLibrary container) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("LIB \'");
-    String _name = container.getName();
-    _builder.append(_name, "");
-    _builder.append("\' {");
-    _builder.newLineIfNotEmpty();
-    {
-      Collection<BuildpathApp> _apps = container.getApps();
-      for(final BuildpathApp e : _apps) {
-        _builder.append("\t");
-        String _debugPrint = this.debugPrint(e);
-        _builder.append(_debugPrint, "	");
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    {
-      Collection<BuildpathLibrary> _libraries = container.getLibraries();
-      for(final BuildpathLibrary e_1 : _libraries) {
-        _builder.append("\t");
-        String _debugPrint_1 = this.debugPrint(e_1);
-        _builder.append(_debugPrint_1, "	");
-        _builder.newLineIfNotEmpty();
-      }
-    }
+    _builder.append("LIB \'\u00B4container.name\u00AA\' {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("\u00B4FOR e: container.apps\u00AA");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("\u00B4e.debugPrint\u00AA");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("\u00B4ENDFOR\u00AA");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("\u00B4FOR e: container.libraries\u00AA");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("\u00B4e.debugPrint\u00AA");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("\u00B4ENDFOR\u00AA");
+    _builder.newLine();
     _builder.append("}");
     _builder.newLine();
     return _builder.toString();
@@ -108,15 +104,15 @@ public class OldProjectBuildpathConverterTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("APP {");
     _builder.newLine();
-    {
-      Collection<BuildpathFolder> _folders = container.getFolders();
-      for(final BuildpathFolder e : _folders) {
-        _builder.append("\t");
-        String _debugPrint = this.debugPrint(e);
-        _builder.append(_debugPrint, "	");
-        _builder.newLineIfNotEmpty();
-      }
-    }
+    _builder.append("\t");
+    _builder.append("\u00B4FOR e: container.folders\u00AA");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("\u00B4e.debugPrint\u00AA");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("\u00B4ENDFOR\u00AA");
+    _builder.newLine();
     _builder.append("}");
     _builder.newLine();
     return _builder.toString();
@@ -124,18 +120,8 @@ public class OldProjectBuildpathConverterTest {
   
   private String _debugPrint(final BuildpathFolder folder) {
     StringConcatenation _builder = new StringConcatenation();
-    FolderKind _kind = folder.getKind();
-    _builder.append(_kind, "");
-    _builder.append(" path=\'");
-    IPath _path = folder.getPath();
-    _builder.append(_path, "");
-    _builder.append("\' inc=");
-    Collection<IPath> _inclusionPatterns = folder.getInclusionPatterns();
-    _builder.append(_inclusionPatterns, "");
-    _builder.append(" exc=");
-    Collection<IPath> _exclusionPatterns = folder.getExclusionPatterns();
-    _builder.append(_exclusionPatterns, "");
-    _builder.newLineIfNotEmpty();
+    _builder.append("\u00B4folder.kind\u00AA path=\'\u00B4folder.path\u00AA\' inc=\u00B4folder.inclusionPatterns\u00AA exc=\u00B4folder.exclusionPatterns\u00AA");
+    _builder.newLine();
     return _builder.toString();
   }
   

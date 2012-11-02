@@ -45,7 +45,7 @@ public class ErlangLinkingHelperTest {
     _builder.append("f() ->");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("[\u00A7ok, 0].");
+    _builder.append("[\u00DFok, 0].");
     _builder.newLine();
     final Pair<Module,List<Integer>> module = this.parser.parse(_builder.toString());
     EObject _objectAtMarker = this._erlangTestExtensions.getObjectAtMarker(module);
@@ -63,7 +63,7 @@ public class ErlangLinkingHelperTest {
     _builder.append("f() ->");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("\u00A7g(3),");
+    _builder.append("\u00DFg(3),");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("ok.");
@@ -81,7 +81,7 @@ public class ErlangLinkingHelperTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("-module(m).");
     _builder.newLine();
-    _builder.append("-spec \u00A7f() -> \'ok\'.");
+    _builder.append("-spec \u00DFf() -> \'ok\'.");
     _builder.newLine();
     _builder.append("f() ->");
     _builder.newLine();
@@ -107,7 +107,7 @@ public class ErlangLinkingHelperTest {
     _builder.append("f() ->");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("w:\u00A7g(3),");
+    _builder.append("w:\u00DFg(3),");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("ok.");
@@ -128,7 +128,7 @@ public class ErlangLinkingHelperTest {
     _builder.append("f() ->");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("?MODULE:\u00A7g(3),");
+    _builder.append("?MODULE:\u00DFg(3),");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("ok.");
@@ -149,7 +149,7 @@ public class ErlangLinkingHelperTest {
     _builder.append("f() ->");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("W:\u00A7g(3),");
+    _builder.append("W:\u00DFg(3),");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("ok.");
@@ -170,7 +170,7 @@ public class ErlangLinkingHelperTest {
     _builder.append("f() ->");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("\u00A7w:g(3),");
+    _builder.append("\u00DFw:g(3),");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("ok.");
@@ -191,7 +191,7 @@ public class ErlangLinkingHelperTest {
     _builder.append("f() ->");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("\u00A7w:G(3),");
+    _builder.append("\u00DFw:G(3),");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("ok.");
@@ -212,7 +212,7 @@ public class ErlangLinkingHelperTest {
     _builder.append("f() ->");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("fun \u00A7w:g/3,");
+    _builder.append("fun \u00DFw:g/3,");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("ok.");
@@ -233,7 +233,7 @@ public class ErlangLinkingHelperTest {
     _builder.append("f() ->");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("fun \u00A7g/2,");
+    _builder.append("fun \u00DFg/2,");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("ok.");
@@ -254,7 +254,7 @@ public class ErlangLinkingHelperTest {
     _builder.append("f() ->");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("fun w:\u00A7g/2,");
+    _builder.append("fun w:\u00DFg/2,");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("ok.");
@@ -275,7 +275,7 @@ public class ErlangLinkingHelperTest {
     _builder.append("f() ->");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("fun ?MODULE:\u00A7g/2,");
+    _builder.append("fun ?MODULE:\u00DFg/2,");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("ok.");
@@ -296,7 +296,7 @@ public class ErlangLinkingHelperTest {
     _builder.append("f() ->");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("fun W:\u00A7g/2,");
+    _builder.append("fun W:\u00DFg/2,");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("ok.");
@@ -317,7 +317,7 @@ public class ErlangLinkingHelperTest {
     _builder.append("f() ->");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("#\u00A7myrec{},");
+    _builder.append("#\u00DFmyrec{},");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("ok.");
@@ -338,7 +338,7 @@ public class ErlangLinkingHelperTest {
     _builder.append("f() ->");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("#\u00A7myrec.az,");
+    _builder.append("#\u00DFmyrec.az,");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("ok.");
@@ -359,7 +359,7 @@ public class ErlangLinkingHelperTest {
     _builder.append("f() ->");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("#myrec.\u00A7ff,");
+    _builder.append("#myrec.\u00DFff,");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("ok.");
@@ -380,7 +380,7 @@ public class ErlangLinkingHelperTest {
     _builder.append("f() ->");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("#Myrec.\u00A7ff,");
+    _builder.append("#Myrec.\u00DFff,");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("ok.");
@@ -401,7 +401,7 @@ public class ErlangLinkingHelperTest {
     _builder.append("f() ->");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("#myrec{\u00A7ff=2},");
+    _builder.append("#myrec{\u00DFff=2},");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("ok.");
@@ -422,7 +422,7 @@ public class ErlangLinkingHelperTest {
     _builder.append("f() ->");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("#Myrec{\u00A7ff=2},");
+    _builder.append("#Myrec{\u00DFff=2},");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("ok.");

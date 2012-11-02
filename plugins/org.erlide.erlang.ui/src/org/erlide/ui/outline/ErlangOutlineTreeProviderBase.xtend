@@ -55,18 +55,19 @@ public class ErlangOutlineTreeProviderBase extends DefaultOutlineTreeProvider {
     def dispatch void createChildren(DocumentRootNode parent, Module module) {
     	//debug_test(module)
     	
-        val recordsNode = new ErlangOutlineNode(parent, null, "Records:", false)
-        val exportsNode = new ErlangOutlineNode(parent, null, "Exports:", false)
-        val macrosNode = new ErlangOutlineNode(parent, null, "Macros:", false)
+//        val recordsNode = new ErlangOutlineNode(parent, null, "Records:", false)
+//        val exportsNode = new ErlangOutlineNode(parent, null, "Exports:", false)
+//        val macrosNode = new ErlangOutlineNode(parent, null, "Macros:", false)
                 
         for (Form element : module.getForms()) {
-        	val theParent = switch element {
-        		ModuleAttribute: null 
-	            RecordAttribute: recordsNode
-	            ExportAttribute: exportsNode
-	            DefineAttribute: macrosNode
-	            default: parent
-            }
+//        	val theParent = switch element {
+//        		ModuleAttribute: null 
+//	            RecordAttribute: recordsNode
+//	            ExportAttribute: exportsNode
+//	            DefineAttribute: macrosNode
+//	            default: parent
+//            }
+			val theParent = parent
             if(theParent!=null) {
             	createChildren(theParent, element)
            	}

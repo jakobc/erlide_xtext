@@ -80,7 +80,7 @@ public class ErlangNamingTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("-module(x).");
     _builder.newLine();
-    _builder.append("\u00A7-type(y::integer()).");
+    _builder.append("\u00DF-type(y::integer()).");
     _builder.newLine();
     final Pair<Module,List<Integer>> module = this.parser.parse(_builder.toString());
     EObject _objectAtMarker = this._erlangTestExtensions.getObjectAtMarker(module, 0);
@@ -97,11 +97,11 @@ public class ErlangNamingTest {
     _builder.newLine();
     _builder.append("-ifdef(M).");
     _builder.newLine();
-    _builder.append("\u00A7-record(y, {}).");
+    _builder.append("\u00DF-record(y, {}).");
     _builder.newLine();
     _builder.append("-else.");
     _builder.newLine();
-    _builder.append("\u00A7-record(y, {}).");
+    _builder.append("\u00DF-record(y, {}).");
     _builder.newLine();
     _builder.append("-endif.");
     _builder.newLine();
@@ -125,7 +125,7 @@ public class ErlangNamingTest {
     _builder.newLine();
     _builder.append("-export([f/0]).");
     _builder.newLine();
-    _builder.append("\u00A7f() -> ok.");
+    _builder.append("\u00DFf() -> ok.");
     _builder.newLine();
     final Pair<Module,List<Integer>> module = this.parser.parse(_builder.toString());
     EObject _objectAtMarker = this._erlangTestExtensions.getObjectAtMarker(module, 0);
@@ -140,7 +140,7 @@ public class ErlangNamingTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("-module(x).");
     _builder.newLine();
-    _builder.append("\u00A7local() -> ok.");
+    _builder.append("\u00DFlocal() -> ok.");
     _builder.newLine();
     final Pair<Module,List<Integer>> module = this.parser.parse(_builder.toString());
     EObject _objectAtMarker = this._erlangTestExtensions.getObjectAtMarker(module, 0);
@@ -157,9 +157,9 @@ public class ErlangNamingTest {
     _builder.newLine();
     _builder.append("-export([f/0, \'Ff\'/1]).");
     _builder.newLine();
-    _builder.append("\u00A7\'Ff\'(X) -> ok.");
+    _builder.append("\u00DF\'Ff\'(X) -> ok.");
     _builder.newLine();
-    _builder.append("\u00A7f() -> ok.");
+    _builder.append("\u00DFf() -> ok.");
     _builder.newLine();
     final Pair<Module,List<Integer>> module = this.parser.parse(_builder.toString());
     EObject _objectAtMarker = this._erlangTestExtensions.getObjectAtMarker(module, 0);
@@ -179,7 +179,7 @@ public class ErlangNamingTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("-module(x).");
     _builder.newLine();
-    _builder.append("\u00A7-define(X, x).");
+    _builder.append("\u00DF-define(X, x).");
     _builder.newLine();
     final Pair<Module,List<Integer>> module = this.parser.parse(_builder.toString());
     EObject _objectAtMarker = this._erlangTestExtensions.getObjectAtMarker(module, 0);
@@ -194,7 +194,7 @@ public class ErlangNamingTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("-module(x).");
     _builder.newLine();
-    _builder.append("\u00A7-record(y, {}).");
+    _builder.append("\u00DF-record(y, {}).");
     _builder.newLine();
     final Pair<Module,List<Integer>> module = this.parser.parse(_builder.toString());
     EObject _objectAtMarker = this._erlangTestExtensions.getObjectAtMarker(module, 0);
@@ -209,7 +209,7 @@ public class ErlangNamingTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("-module(x).");
     _builder.newLine();
-    _builder.append("\u00A7-record(\'Y\', {}).");
+    _builder.append("\u00DF-record(\'Y\', {}).");
     _builder.newLine();
     final Pair<Module,List<Integer>> module = this.parser.parse(_builder.toString());
     EObject _objectAtMarker = this._erlangTestExtensions.getObjectAtMarker(module, 0);
