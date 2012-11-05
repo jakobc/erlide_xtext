@@ -226,4 +226,8 @@ public class ErlangLabelProviderBase extends DefaultEObjectLabelProvider {
     ErlideStyler _erlideStyler = new ErlideStyler(font, color);
     return _erlideStyler;
   }
+  
+  public String image(final FunRef ele) {
+    return "function_ref.gif";
+  }
 }

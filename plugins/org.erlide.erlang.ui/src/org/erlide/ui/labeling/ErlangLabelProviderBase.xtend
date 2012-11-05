@@ -137,11 +137,13 @@ public class ErlangLabelProviderBase extends DefaultEObjectLabelProvider {
   	def String image(Attribute ele) {
   		"attribute.gif"
   	}
-	    
+
     def private static Styler createStyler(Font font, Color color) {
         new ErlideStyler(font, color)
     }
 
-
+	def String image(FunRef ele) {
+		"function_ref.gif"
+	}
 
 }

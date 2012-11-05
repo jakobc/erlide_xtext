@@ -96,6 +96,16 @@
             id="org.erlide.Erlang.validate"
             name="Validate">
       </command>
+      <command
+            description="Hide In Outline"
+            id="org.erlide.ui.command.toolbarFilter"
+            name="Hide In Outline">
+         <commandParameter
+               id="org.erlide.ui.filterId"
+               name="Filter ID"
+               optional="true">
+         </commandParameter>
+      </command>
     </extension>
     <extension point="org.eclipse.ui.menus">
         <menuContribution
@@ -217,6 +227,20 @@
 				</visibleWhen>
 			</command>
 		</menuContribution>
+  <menuContribution
+        allPopups="false"
+        locationURI="toolbar:org.eclipse.ui.views.ContentOutline">
+     <command
+           commandId="org.erlide.ui.command.toolbarFilter"
+           icon="icons/commands/hide_attributes.gif"
+           label="Hide Attributes"
+           style="toggle">
+        <parameter
+              name="org.erlide.ui.filterId"
+              value="attributesFilter">
+        </parameter>
+     </command>
+  </menuContribution>
 	</extension>
     <!-- quickfix marker resolution generator for org.erlide.Erlang -->
     <extension
