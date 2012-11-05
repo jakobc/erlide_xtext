@@ -13,6 +13,7 @@ import org.eclipse.xtext.ui.editor.folding.IFoldingRegionProvider;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
 import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.ResourceForIEditorInputFactory;
+import org.eclipse.xtext.ui.editor.outline.actions.IOutlineContribution;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
@@ -24,6 +25,7 @@ import org.erlide.ui.folding.MyFoldingRegionProvider;
 import org.erlide.ui.hover.ErlangEObjectDocumentationProvider;
 import org.erlide.ui.hover.ErlangEObjectHoverProvider;
 import org.erlide.ui.navigator.ErlangContentProvider;
+import org.erlide.ui.outline.FilterOperationsContribution;
 import org.erlide.ui.syntaxcoloring.ErlangAntlrTokenToAttributeIdMapper;
 import org.erlide.ui.syntaxcoloring.ErlangSemanticHighlightingCalculator;
 import org.erlide.ui.syntaxcoloring.ErlangSemanticHighlightingConfiguration;
@@ -46,6 +48,7 @@ public class ErlangUiModule extends org.erlide.ui.AbstractErlangUiModule {
                         com.google.inject.name.Names
                                 .named((XtextContentAssistProcessor.COMPLETION_AUTO_ACTIVATION_CHARS)))
                 .toInstance(":#");
+        configureFilterOperationsContribution(binder);
     }
 
     @Override
@@ -93,10 +96,12 @@ public class ErlangUiModule extends org.erlide.ui.AbstractErlangUiModule {
         return ErlangEObjectDocumentationProvider.class;
     }
 
-    @Override
-    public Class<? extends AbstractEditStrategyProvider> bindAbstractEditStrategyProvider() {
-        return ErlangAutoEditStrategyProvider.class;
-    }
+    public void configureFilterOperationsContribution(Binder binder) {
+    	  binder
+    	    .bind(IOutlineContribution.class).annotatedWith(
+    	    		com.google.inject.name.Names.named("FilterOperationsContribution"))
+    	    .to(FilterOperationsContribution.class);
+    	}
 
     @Override
     public Class<? extends IImageHelper> bindIImageHelper() {
