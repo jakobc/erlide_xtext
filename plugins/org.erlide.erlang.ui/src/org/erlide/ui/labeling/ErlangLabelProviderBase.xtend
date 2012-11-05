@@ -108,9 +108,12 @@ public class ErlangLabelProviderBase extends DefaultEObjectLabelProvider {
 	}
 
 	def String text(ExportAttribute ele) {
-		"export: " + ele.funs.map[[FunRef f | text(f)]].join(", ")
+		"export: " + ele.funs.map[FunRef f | text(f)].join(", ")
 	}
 
+	def String text(FunRef c) {
+		return c.function.sourceText + "/" + c.arity.sourceText
+    }
 
 	def String getListText(EList<Expression> list) {
 		return list.map[sourceText].join(", ")

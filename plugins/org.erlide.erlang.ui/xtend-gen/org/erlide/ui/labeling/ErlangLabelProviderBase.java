@@ -167,21 +167,25 @@ public class ErlangLabelProviderBase extends DefaultEObjectLabelProvider {
   
   public String text(final ExportAttribute ele) {
     EList<FunRef> _funs = ele.getFuns();
-    final Function1<FunRef,Function1<FunRef,Object>> _function = new Function1<FunRef,Function1<FunRef,Object>>() {
-        public Function1<FunRef,Object> apply(final FunRef it) {
-          final Function1<FunRef,Object> _function = new Function1<FunRef,Object>() {
-              public Object apply(final FunRef f) {
-                Object _text = ErlangLabelProvider.this.text(f);
-                return _text;
-              }
-            };
-          return _function;
+    final Function1<FunRef,String> _function = new Function1<FunRef,String>() {
+        public String apply(final FunRef f) {
+          String _text = ErlangLabelProvider.this.text(f);
+          return _text;
         }
       };
-    List<Function1<FunRef,Object>> _map = ListExtensions.<FunRef, Function1<FunRef,Object>>map(_funs, _function);
+    List<String> _map = ListExtensions.<FunRef, String>map(_funs, _function);
     String _join = IterableExtensions.join(_map, ", ");
     String _plus = ("export: " + _join);
     return _plus;
+  }
+  
+  public String text(final FunRef c) {
+    Expression _function = c.getFunction();
+    String _sourceText = this._modelExtensions.getSourceText(_function);
+    String _plus = (_sourceText + "/");
+    Expression _arity = c.getArity();
+    String _sourceText_1 = this._modelExtensions.getSourceText(_arity);
+    return (_plus + _sourceText_1);
   }
   
   public String getListText(final EList<Expression> list) {
