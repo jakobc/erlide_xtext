@@ -2,10 +2,10 @@ package org.erlide.ui.outline;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.xtext.ui.PluginImageHelper;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.actions.AbstractFilterOutlineContribution;
 import org.eclipse.xtext.ui.editor.outline.impl.EObjectNode;
+import org.erlide.common.ui.ErlideImageHelper;
 import org.erlide.erlang.Attribute;
 
 import com.google.inject.Inject;
@@ -17,7 +17,7 @@ public class FilterOperationsContribution extends
 			    "ui.outline.filterOperations";
 			 
 			  @Inject
-			  private PluginImageHelper imageHelper;
+			  private ErlideImageHelper imageHelper;
 			  
 			  @Override
 			  protected boolean apply(IOutlineNode node) {
@@ -36,7 +36,7 @@ public class FilterOperationsContribution extends
 			    action.setText("Hide attributes");
 			    action.setDescription("Hide attributes");
 			    action.setToolTipText("Hide attributes");
-			    action.setImageDescriptor(getImageDescriptor("icons/commands/hide_attributes.gif"));
+			    action.setImageDescriptor(getImageDescriptor("commands/hide_attributes.gif"));
 			  }
 			 
 			  protected ImageDescriptor getImageDescriptor(String imagePath) {
