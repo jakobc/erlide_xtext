@@ -16,11 +16,14 @@ public class HideAttributesFilterOperationsContribution extends
 	protected boolean shouldShow(EObjectNode eObjectNode) {
 		EClass eClass = eObjectNode.getEClass();
 		EList<EClass> eSuperTypes = eClass.getESuperTypes();
-		boolean attribute = eSuperTypes.contains(ErlangPackage.Literals.ATTRIBUTE);
+		boolean attribute = eSuperTypes
+				.contains(ErlangPackage.Literals.ATTRIBUTE);
 		boolean record = eClass.equals(ErlangPackage.Literals.RECORD_ATTRIBUTE);
-		boolean macro =eClass.equals(ErlangPackage.Literals.ABSTRACT_DEFINE_ATTRIBUTE);
-		boolean type = eClass.equals(ErlangPackage.Literals.ABSTRACT_TYPE_ATTRIBUTE);
+		boolean macro = eClass
+				.equals(ErlangPackage.Literals.ABSTRACT_DEFINE_ATTRIBUTE);
+		boolean type = eClass
+				.equals(ErlangPackage.Literals.ABSTRACT_TYPE_ATTRIBUTE);
 		return !attribute || record || macro || type;
 	}
-	
+
 }

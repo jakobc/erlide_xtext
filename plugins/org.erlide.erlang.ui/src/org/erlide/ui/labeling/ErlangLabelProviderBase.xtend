@@ -11,22 +11,22 @@ import org.eclipse.swt.graphics.Color
 import org.eclipse.swt.graphics.Font
 import org.eclipse.swt.widgets.Display
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider
+import org.erlide.erlang.AbstractDefineAttribute
+import org.erlide.erlang.AbstractTypeAttribute
 import org.erlide.erlang.Attribute
 import org.erlide.erlang.CustomAttribute
 import org.erlide.erlang.DefineAttribute
+import org.erlide.erlang.ExportAttribute
 import org.erlide.erlang.Expression
 import org.erlide.erlang.FunRef
 import org.erlide.erlang.Function
 import org.erlide.erlang.FunctionClause
 import org.erlide.erlang.ModelExtensions
 import org.erlide.erlang.Module
-import org.erlide.erlang.RecordAttribute
 import org.erlide.erlang.ModuleAttribute
-import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider
-import org.erlide.erlang.FunRef
-import org.erlide.erlang.ExportAttribute
-import org.erlide.erlang.AbstractTypeAttribute
-import org.erlide.erlang.AbstractDefineAttribute
+import org.erlide.erlang.RecordAttribute
+
+import static org.erlide.ui.labeling.ErlangLabelProviderBase.*
 
 /**
  * Provides labels for a EObjects.

@@ -1,23 +1,22 @@
 package org.erlide.ui.outline
 
+import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.swt.graphics.Image
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode
 import org.eclipse.xtext.ui.editor.outline.impl.AbstractOutlineNode
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider
 import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode
+import org.erlide.erlang.DefineAttribute
+import org.erlide.erlang.ErlangPackage$Literals
 import org.erlide.erlang.ExportAttribute
 import org.erlide.erlang.Form
 import org.erlide.erlang.FunRef
 import org.erlide.erlang.FunctionClause
 import org.erlide.erlang.Module
-import org.erlide.erlang.ModuleAttribute
 import org.erlide.erlang.RecordAttribute
-import org.erlide.erlang.DefineAttribute
-import org.erlide.erlang.ErlangPackage
-import com.google.inject.Inject
 import org.erlide.erlang.ScopeExtensions
-import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
 
 /**
  * outline structure -- group same type of forms under common parent

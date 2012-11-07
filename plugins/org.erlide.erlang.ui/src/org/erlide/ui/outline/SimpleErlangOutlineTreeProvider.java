@@ -16,19 +16,19 @@ import org.erlide.erlang.Module;
  */
 public class SimpleErlangOutlineTreeProvider extends DefaultOutlineTreeProvider {
 
-    protected boolean _isLeaf(final FunctionClause c) {
-        return true;
-    }
+	protected boolean _isLeaf(final FunctionClause c) {
+		return true;
+	}
 
-    protected boolean _isLeaf(final FunRef c) {
-        return true;
-    }
+	protected boolean _isLeaf(final FunRef c) {
+		return true;
+	}
 
-    protected void _createChildren(final DocumentRootNode parent,
-            final Module module) {
-        for (final Form element : module.getForms()) {
-            createNode(parent, element);
-        }
-    }
+	protected void _createChildren(final DocumentRootNode parent,
+			final Module module) {
+		for (final Form element : module.getForms()) {
+			createNode(parent, element);
+		}
+	}
 
 }
