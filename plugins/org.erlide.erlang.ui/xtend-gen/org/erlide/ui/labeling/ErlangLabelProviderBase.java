@@ -17,6 +17,8 @@ import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.erlide.erlang.AbstractDefineAttribute;
+import org.erlide.erlang.AbstractTypeAttribute;
 import org.erlide.erlang.Attribute;
 import org.erlide.erlang.CustomAttribute;
 import org.erlide.erlang.DefineAttribute;
@@ -138,7 +140,7 @@ public class ErlangLabelProviderBase extends DefaultEObjectLabelProvider {
     return s;
   }
   
-  public Object text(final FunctionClause clause) {
+  public StyledString text(final FunctionClause clause) {
     StyledString _styledString = new StyledString();
     final StyledString s = _styledString;
     Expressions _params = clause.getParams();
@@ -169,7 +171,7 @@ public class ErlangLabelProviderBase extends DefaultEObjectLabelProvider {
     EList<FunRef> _funs = ele.getFuns();
     final Function1<FunRef,String> _function = new Function1<FunRef,String>() {
         public String apply(final FunRef f) {
-          String _text = ErlangLabelProvider.this.text(f);
+          String _text = ErlangLabelProviderBase.this.text(f);
           return _text;
         }
       };
@@ -216,6 +218,18 @@ public class ErlangLabelProviderBase extends DefaultEObjectLabelProvider {
   
   public String image(final FunctionClause element) {
     return "function_clause.gif";
+  }
+  
+  public String image(final RecordAttribute element) {
+    return "macro_record_type_definition.gif";
+  }
+  
+  public String image(final AbstractDefineAttribute element) {
+    return "macro_record_type_definition.gif";
+  }
+  
+  public String image(final AbstractTypeAttribute element) {
+    return "macro_record_type_definition.gif";
   }
   
   public String image(final Attribute ele) {

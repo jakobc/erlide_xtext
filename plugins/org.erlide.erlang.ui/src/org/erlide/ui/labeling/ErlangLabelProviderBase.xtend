@@ -25,6 +25,8 @@ import org.erlide.erlang.ModuleAttribute
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider
 import org.erlide.erlang.FunRef
 import org.erlide.erlang.ExportAttribute
+import org.erlide.erlang.AbstractTypeAttribute
+import org.erlide.erlang.AbstractDefineAttribute
 
 /**
  * Provides labels for a EObjects.
@@ -88,7 +90,7 @@ public class ErlangLabelProviderBase extends DefaultEObjectLabelProvider {
         return s
     }
     
-    def Object text(FunctionClause clause) {
+    def text(FunctionClause clause) {
         val StyledString s = new StyledString
         val args = clause.params.sourceText
         s.append((clause.eContainer as Function).name, grayStyler)
@@ -130,8 +132,20 @@ public class ErlangLabelProviderBase extends DefaultEObjectLabelProvider {
 			"private_function.gif" 
   	}
   
-	def String image(FunctionClause element) {
+	def image(FunctionClause element) {
 		"function_clause.gif"
+  	}
+  	
+  	def image(RecordAttribute element) {
+  		"macro_record_type_definition.gif"
+  	}
+  	
+  	def image(AbstractDefineAttribute element) {
+  		"macro_record_type_definition.gif"
+  	}
+  	
+  	def image(AbstractTypeAttribute element) {
+  		"macro_record_type_definition.gif"
   	}
   	
   	def String image(Attribute ele) {

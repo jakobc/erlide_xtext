@@ -7,7 +7,6 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.ui.IImageHelper;
-import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.contentassist.XtextContentAssistProcessor;
 import org.eclipse.xtext.ui.editor.folding.IFoldingRegionProvider;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
@@ -20,12 +19,13 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculato
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.SimpleResourceSetProvider;
 import org.erlide.common.ui.ErlideImageHelper;
-import org.erlide.ui.autoedit.ErlangAutoEditStrategyProvider;
 import org.erlide.ui.folding.MyFoldingRegionProvider;
 import org.erlide.ui.hover.ErlangEObjectDocumentationProvider;
 import org.erlide.ui.hover.ErlangEObjectHoverProvider;
 import org.erlide.ui.navigator.ErlangContentProvider;
-import org.erlide.ui.outline.FilterOperationsContribution;
+import org.erlide.ui.outline.HideAttributesFilterOperationsContribution;
+import org.erlide.ui.outline.HideLocalFunctionsFilterOperationsContribution;
+import org.erlide.ui.outline.HideRecordMacroTypeDefinitionsFilterOperationsContribution;
 import org.erlide.ui.syntaxcoloring.ErlangAntlrTokenToAttributeIdMapper;
 import org.erlide.ui.syntaxcoloring.ErlangSemanticHighlightingCalculator;
 import org.erlide.ui.syntaxcoloring.ErlangSemanticHighlightingConfiguration;
@@ -36,76 +36,87 @@ import com.google.inject.Binder;
  * Use this class to register components to be used within the IDE.
  */
 public class ErlangUiModule extends org.erlide.ui.AbstractErlangUiModule {
-    public ErlangUiModule(final AbstractUIPlugin plugin) {
-        super(plugin);
-    }
+	public ErlangUiModule(final AbstractUIPlugin plugin) {
+		super(plugin);
+	}
 
-    @Override
-    public void configure(final Binder binder) {
-        super.configure(binder);
-        binder.bind(String.class)
-                .annotatedWith(
-                        com.google.inject.name.Names
-                                .named((XtextContentAssistProcessor.COMPLETION_AUTO_ACTIVATION_CHARS)))
-                .toInstance(":#");
-        configureFilterOperationsContribution(binder);
-    }
+	@Override
+	public void configure(final Binder binder) {
+		super.configure(binder);
+		binder.bind(String.class)
+				.annotatedWith(
+						com.google.inject.name.Names
+								.named((XtextContentAssistProcessor.COMPLETION_AUTO_ACTIVATION_CHARS)))
+				.toInstance(":#");
+		configureFilterOperationsContribution(binder);
+	}
 
-    @Override
-    public Class<? extends IResourceForEditorInputFactory> bindIResourceForEditorInputFactory() {
-        return ResourceForIEditorInputFactory.class;
-    }
+	@Override
+	public Class<? extends IResourceForEditorInputFactory> bindIResourceForEditorInputFactory() {
+		return ResourceForIEditorInputFactory.class;
+	}
 
-    @Override
-    public Class<? extends IResourceSetProvider> bindIResourceSetProvider() {
-        return SimpleResourceSetProvider.class;
-    }
+	@Override
+	public Class<? extends IResourceSetProvider> bindIResourceSetProvider() {
+		return SimpleResourceSetProvider.class;
+	}
 
-    public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
-        return ErlangSemanticHighlightingCalculator.class;
-    }
+	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
+		return ErlangSemanticHighlightingCalculator.class;
+	}
 
-    public Class<? extends IHighlightingConfiguration> bindISemanticHighlightingConfiguration() {
-        return ErlangSemanticHighlightingConfiguration.class;
-    }
+	public Class<? extends IHighlightingConfiguration> bindISemanticHighlightingConfiguration() {
+		return ErlangSemanticHighlightingConfiguration.class;
+	}
 
-    public Class<? extends AbstractAntlrTokenToAttributeIdMapper> bindTokenToAttributeIdMapper() {
-        return ErlangAntlrTokenToAttributeIdMapper.class;
-    }
+	public Class<? extends AbstractAntlrTokenToAttributeIdMapper> bindTokenToAttributeIdMapper() {
+		return ErlangAntlrTokenToAttributeIdMapper.class;
+	}
 
-    public Class<? extends IFoldingRegionProvider> bindFoldingRegionProvider() {
-        return MyFoldingRegionProvider.class;
-    }
+	public Class<? extends IFoldingRegionProvider> bindFoldingRegionProvider() {
+		return MyFoldingRegionProvider.class;
+	}
 
-    public Class<? extends ITreeContentProvider> bindTreeContentProvider() {
-        return ErlangContentProvider.class;
-    }
+	public Class<? extends ITreeContentProvider> bindTreeContentProvider() {
+		return ErlangContentProvider.class;
+	}
 
-    // This makes the editors update when opened (don't wait for a change and
-    // rebuild)
-    @Override
-    public Class<? extends org.eclipse.xtext.ui.editor.IXtextEditorCallback> bindIXtextEditorCallback() {
-        return org.eclipse.xtext.ui.editor.validation.ValidatingEditorCallback.class;
-    }
+	// This makes the editors update when opened (don't wait for a change and
+	// rebuild)
+	@Override
+	public Class<? extends org.eclipse.xtext.ui.editor.IXtextEditorCallback> bindIXtextEditorCallback() {
+		return org.eclipse.xtext.ui.editor.validation.ValidatingEditorCallback.class;
+	}
 
-    public Class<? extends IEObjectHoverProvider> bindIEObjectHoverProvider() {
-        return ErlangEObjectHoverProvider.class;
-    }
+	public Class<? extends IEObjectHoverProvider> bindIEObjectHoverProvider() {
+		return ErlangEObjectHoverProvider.class;
+	}
 
-    public Class<? extends IEObjectDocumentationProvider> bindIEObjectDocumentationProviderr() {
-        return ErlangEObjectDocumentationProvider.class;
-    }
+	public Class<? extends IEObjectDocumentationProvider> bindIEObjectDocumentationProviderr() {
+		return ErlangEObjectDocumentationProvider.class;
+	}
 
-    public void configureFilterOperationsContribution(Binder binder) {
-    	  binder
-    	    .bind(IOutlineContribution.class).annotatedWith(
-    	    		com.google.inject.name.Names.named("FilterOperationsContribution"))
-    	    .to(FilterOperationsContribution.class);
-    	}
+	public void configureFilterOperationsContribution(Binder binder) {
+		binder.bind(IOutlineContribution.class)
+				.annotatedWith(
+						com.google.inject.name.Names
+								.named("HideAttributesFilterOperationsContribution"))
+				.to(HideAttributesFilterOperationsContribution.class);
+		binder.bind(IOutlineContribution.class)
+				.annotatedWith(
+						com.google.inject.name.Names
+								.named("HideLocalFunctionsFilterOperationsContribution"))
+				.to(HideLocalFunctionsFilterOperationsContribution.class);
+		binder.bind(IOutlineContribution.class)
+				.annotatedWith(
+						com.google.inject.name.Names
+								.named("HideRecordMacroTypeDefinitionsFilterOperationsContribution"))
+				.to(HideRecordMacroTypeDefinitionsFilterOperationsContribution.class);
+	}
 
-    @Override
-    public Class<? extends IImageHelper> bindIImageHelper() {
-        return ErlideImageHelper.class;
-    }
+	@Override
+	public Class<? extends IImageHelper> bindIImageHelper() {
+		return ErlideImageHelper.class;
+	}
 
 }
